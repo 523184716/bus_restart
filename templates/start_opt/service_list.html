@@ -1,0 +1,56 @@
+{% extends 'start_opt/base.html' %}
+
+{% load staticfiles %}
+{% block content-center %}
+    <br/>
+    <h5>当前项目>><strong>{{ project_name }}</strong></h5>
+    <h3>服务列表</h3>
+{#    <ul>#}
+{#        {% for service in obj %}#}
+{#            <li>{{ service.service__service_name }}</li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+    <table class="table table-hover">
+        <tr>
+            <td>ID:</td>
+            <td>服务名</td>
+            <td>启动</td>
+            <td>停止</td>
+            <td>重启</td>
+        </tr>
+        {% for service in obj %}
+        <tr>
+            <td>{{ service.service__id }}</td>
+            <td>{{ service.service__service_name }}</td>
+            <td><button type="button" class="btn btn-success" id="service_start{{ service.service__id }}" onclick="start(this,{{ service.service__id }})">start</button></td>
+            <td><button type="button" class="btn btn-success" id="service_stop{{ service.service__id }}">stop</button></td>
+            <td><button type="button" class="btn btn-success" id="service_restart{{ service.service__id }}" onclick="restart(this,{{ service.service__id }})">restart</button></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br/>
+    <h5 class="text-right"><a href="{% url "start_opt:index" %}">>>返回首页</a></h5>
+{% endblock %}
+{% block body-myself %}
+    <script>
+        function restart(doc,id) {
+            id_tag = "#service_restart"+id
+            $(id_tag).click(function () {
+                service_name = $(id_tag).closest('tr').children("td").eq(1).text();
+                console.log (service_name)
+                $.ajax({
+                    url:"/start_opt/service/{{ project_name }}",
+                    type:"POST",
+                    data:{"service_name":service_name,
+                        "csrfmiddlewaretoken":"{{ csrf_token }}"},
+                    success:function (args) {
+                        console.log(args)
+                    },
+                    error:function () {
+                        alert("重启失败")
+                    }
+                });
+            })
+        }
+    </script>
+{% endblock %}

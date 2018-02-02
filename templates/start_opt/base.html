@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{#{% load my_tags %}#}
+
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %} 测试环境 {% endblock %}</title>
+    <!--<link type="text/css" rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css">-->
+    <!--<link type="text/css" rel="stylesheet" href="../static/css/index.css">-->
+    <link type="text/css" rel="stylesheet" href="{% static "/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="{% static "/css/ceshi.css" %}">
+    {% block mycss %}
+    {% endblock %}
+</head>
+<body >
+    {% block nav-image %}
+        <div class="row">
+          <div class="col-md-12">
+              <img src="{% static "/image/new_top-min.jpg" %}" class="img-responsive" alt="Responsive image">
+          </div>
+        </div>
+    {% endblock %}
+    {% block nav-tag %}
+    {% endblock %}
+    {% block body-content %}
+        <div class="container navbgl">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-8">
+                    {% block content-left %}
+                        <div class="row ">
+                            <div class="">
+                                <br>
+                                <a href="#">资产配置</a>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="">
+                                - IP:115.159.75.214
+                            </div>
+                        </div>
+                    {% endblock %}
+                </div>
+                <div class="col-md-7 col-sm-7 col-xs-10 ">
+                    {% block content-center %}
+                    {% endblock %}
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-8 ">
+                    {% block content-right %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+    {% block body-myself %}
+    {% endblock %}
+</body>
+</html>

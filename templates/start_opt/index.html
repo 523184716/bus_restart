@@ -1,0 +1,11 @@
+{% extends 'start_opt/base.html' %}
+{% load staticfiles %}
+{% block content-center %}
+    <br/>
+    <h3>项目列表</h3>
+    <ul>
+        {% for project in obj %}
+            <li><a href="/start_opt/service/{{ project.project__project_name }}">{{ project.project__project_name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
